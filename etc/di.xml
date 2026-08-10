@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magecko\Blog\Api\PostRepositoryInterface" type="Magecko\Blog\Model\PostRepository"/>
+    <preference for="Magecko\Blog\Api\MediaManagementInterface" type="Magecko\Blog\Model\MediaManagement"/>
+    <preference for="Magecko\Blog\Api\Data\PostInterface" type="Magecko\Blog\Model\Post"/>
+    <preference for="Magecko\Blog\Api\Data\PostSearchResultsInterface" type="Magecko\Blog\Model\PostSearchResults"/>
+    <preference for="Magecko\Blog\Api\Data\ImageUploadInterface" type="Magecko\Blog\Model\Data\ImageUpload"/>
+    <preference for="Magecko\Blog\Api\Data\ImageUploadResultInterface" type="Magecko\Blog\Model\Data\ImageUploadResult"/>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mageckoCompatibilityCheck" xsi:type="object">Magecko\Blog\Console\Command\CompatibilityCheckCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

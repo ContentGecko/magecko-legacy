@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="magecko_blog" translate="label" sortOrder="910"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Magecko Blog</label>
+            <tab>general</tab>
+            <resource>Magecko_Blog::config</resource>
+            <group id="storefront" translate="label" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Storefront</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Disabled by default so installation cannot take over an existing blog URL.</comment>
+                </field>
+                <field id="route" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Frontend Route</label>
+                    <backend_model>Magecko\Blog\Model\Config\Backend\Route</backend_model>
+                    <validate>required-entry</validate>
+                    <comment>Example: magecko-test. Run magecko:compatibility-check before enabling.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

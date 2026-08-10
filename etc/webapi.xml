@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/magecko-blog/posts" method="GET">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId" method="GET">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId/store/:storeId" method="GET">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="getByIdForStore"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/slug/:slug" method="GET">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="getBySlug"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/store/:storeId/slug/:slug" method="GET">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="getBySlugForStore"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts" method="POST">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId" method="PUT">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="saveById"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId/store/:storeId" method="PUT">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="saveTranslation"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId" method="DELETE">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/posts/:postId/store/:storeId" method="DELETE">
+        <service class="Magecko\Blog\Api\PostRepositoryInterface" method="deleteTranslation"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+    <route url="/V1/magecko-blog/media" method="POST">
+        <service class="Magecko\Blog\Api\MediaManagementInterface" method="upload"/>
+        <resources>
+            <resource ref="Magecko_Blog::posts"/>
+        </resources>
+    </route>
+</routes>

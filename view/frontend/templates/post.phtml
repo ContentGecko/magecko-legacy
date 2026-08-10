@@ -1,0 +1,34 @@
+<?php
+/** @var \Magecko\Blog\Block\Frontend\PostView $block */
+$post = $block->getPost();
+?>
+<article class="magecko-blog-post">
+    <a class="magecko-blog-back" href="<?= $block->escapeUrl($block->getBlogUrl()) ?>">Back to blog</a>
+    <header>
+        <div class="magecko-blog-meta">
+            <?php if ($post->getData('topic')): ?>
+                <span><?= $block->escapeHtml((string)$post->getData('topic')) ?></span>
+            <?php endif; ?>
+            <?php if ($post->getData('publish_date')): ?>
+                <time><?= $block->escapeHtml($block->formatPostDate((string)$post->getData('publish_date'))) ?></time>
+            <?php endif; ?>
+            <?php if ($post->getData('author')): ?>
+                <span>By <?= $block->escapeHtml((string)$post->getData('author')) ?></span>
+            <?php endif; ?>
+        </div>
+        <h1><?= $block->escapeHtml((string)$post->getData('title')) ?></h1>
+        <?php if ($post->getData('featured_image')): ?>
+            <figure class="magecko-blog-featured-image">
+                <img src="<?= $block->escapeUrl($block->getMediaUrl((string)$post->getData('featured_image'))) ?>" alt="<?= $block->escapeHtmlAttr((string)($post->getData('featured_image_alt') ?: $post->getData('title'))) ?>">
+            </figure>
+        <?php endif; ?>
+    </header>
+    <div class="magecko-blog-body">
+        <?= /* @noEscape */ $block->filterHtml((string)$post->getData('body_html')) ?>
+    </div>
+    <?php if ($post->getData('modified_date')): ?>
+        <footer class="magecko-blog-updated">
+            Last updated <?= $block->escapeHtml($block->formatPostDate((string)$post->getData('modified_date'))) ?>
+        </footer>
+    <?php endif; ?>
+</article>

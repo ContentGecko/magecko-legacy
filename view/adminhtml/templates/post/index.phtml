@@ -1,0 +1,165 @@
+<?php
+/** @var \Magecko\Blog\Block\Adminhtml\Post\Index $block */
+$posts = $block->getPosts();
+$titleFilter = $block->getTitleFilter();
+$statusFilter = $block->getStatusFilter();
+$topicFilter = $block->getTopicFilter();
+$authorFilter = $block->getAuthorFilter();
+$currentPage = $block->getCurrentPage();
+$totalPages = $block->getTotalPages();
+$pageSize = $block->getPageSize();
+?>
+<div class="page-main-actions">
+    <div class="page-actions">
+        <a class="action-primary" href="<?= $block->escapeUrl($block->getNewUrl()) ?>">Add New Post</a>
+    </div>
+</div>
+
+<form class="magecko-grid-filter" method="get" action="<?= $block->escapeUrl($block->getFilterUrl()) ?>">
+    <input type="hidden" name="p" value="1">
+    <div class="magecko-grid-filter-fields">
+        <input class="admin__control-text" type="search" name="title" value="<?= $block->escapeHtmlAttr($titleFilter) ?>" placeholder="Title">
+        <select class="admin__control-select" name="status">
+            <option value="">All statuses</option>
+            <option value="draft"<?= $statusFilter === \Magecko\Blog\Model\Post::STATUS_DRAFT ? ' selected' : '' ?>>Draft</option>
+            <option value="published"<?= $statusFilter === \Magecko\Blog\Model\Post::STATUS_PUBLISHED ? ' selected' : '' ?>>Published</option>
+        </select>
+        <input class="admin__control-text" type="search" name="topic" value="<?= $block->escapeHtmlAttr($topicFilter) ?>" placeholder="Category">
+        <input class="admin__control-text" type="search" name="author" value="<?= $block->escapeHtmlAttr($authorFilter) ?>" placeholder="Author">
+        <select class="admin__control-select" name="limit">
+            <?php foreach ($block->getPageSizeOptions() as $option): ?>
+                <option value="<?= (int)$option ?>"<?= $pageSize === (int)$option ? ' selected' : '' ?>><?= (int)$option ?> / page</option>
+            <?php endforeach; ?>
+        </select>
+        <button class="action-secondary" type="submit">Filter</button>
+        <a class="action-default" href="<?= $block->escapeUrl($block->getClearFilterUrl()) ?>">Clear</a>
+    </div>
+</form>
+
+<div class="magecko-grid-summary">
+    <span><?= (int)$posts->getSize() ?> post<?= $posts->getSize() === 1 ? '' : 's' ?></span>
+    <span>Page <?= (int)$currentPage ?> of <?= (int)$totalPages ?></span>
+</div>
+
+<section class="admin__data-grid-wrap">
+    <table class="data-grid">
+        <thead>
+        <tr>
+            <th class="data-grid-th">ID</th>
+            <th class="data-grid-th">Title</th>
+            <th class="data-grid-th">Status</th>
+            <th class="data-grid-th">Slug</th>
+            <th class="data-grid-th">Topic</th>
+            <th class="data-grid-th">Author</th>
+            <th class="data-grid-th">Publish Date</th>
+            <th class="data-grid-th">Modified Date</th>
+            <th class="data-grid-th">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if (!$posts->getSize()): ?>
+            <tr>
+                <td colspan="9">No blog posts found.</td>
+            </tr>
+        <?php endif; ?>
+        <?php foreach ($posts as $post): ?>
+            <tr>
+                <td><?= (int)$post->getId() ?></td>
+                <td>
+                    <strong><?= $block->escapeHtml((string)$post->getData('title')) ?></strong><br>
+                    <?php if ($block->isPublished((string)$post->getData('status'))
+                        && $block->isStorefrontEnabled()): ?>
+                        <a href="<?= $block->escapeUrl($block->getBlogUrl((string)$post->getData('slug'))) ?>" target="_blank" rel="noopener">
+                            View on storefront
+                        </a>
+                    <?php endif; ?>
+                </td>
+                <td><span class="magecko-status magecko-status-<?= $block->escapeHtmlAttr((string)$post->getData('status')) ?>"><?= $block->escapeHtml($block->getStatusLabel((string)$post->getData('status'))) ?></span></td>
+                <td><?= $block->escapeHtml((string)$post->getData('slug')) ?></td>
+                <td><?= $block->escapeHtml((string)$post->getData('topic')) ?></td>
+                <td><?= $block->escapeHtml((string)$post->getData('author')) ?></td>
+                <td><?= $block->escapeHtml((string)$post->getData('publish_date')) ?></td>
+                <td><?= $block->escapeHtml((string)$post->getData('modified_date')) ?></td>
+                <td>
+                    <a href="<?= $block->escapeUrl($block->getEditUrl((int)$post->getId())) ?>">Edit</a>
+                    <form method="post"
+                          action="<?= $block->escapeUrl($block->getDeleteUrl((int)$post->getId())) ?>"
+                          style="display:inline"
+                          onsubmit="return confirm('Delete this blog post?');">
+                        <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>">
+                        <button type="submit" class="action-delete" style="border:0;background:transparent;color:#eb5202;cursor:pointer;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</section>
+
+<?php if ($totalPages > 1): ?>
+    <nav class="magecko-pager" aria-label="Blog post pages">
+        <?php if ($currentPage > 1): ?>
+            <a class="action-default" href="<?= $block->escapeUrl($block->getPagerUrl($currentPage - 1)) ?>">Previous</a>
+        <?php endif; ?>
+
+        <?php for ($page = 1; $page <= $totalPages; $page++): ?>
+            <?php if ($page === $currentPage): ?>
+                <strong><?= (int)$page ?></strong>
+            <?php else: ?>
+                <a href="<?= $block->escapeUrl($block->getPagerUrl($page)) ?>"><?= (int)$page ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a class="action-default" href="<?= $block->escapeUrl($block->getPagerUrl($currentPage + 1)) ?>">Next</a>
+        <?php endif; ?>
+    </nav>
+<?php endif; ?>
+
+<style>
+.magecko-grid-filter {
+    margin: 0 0 18px;
+}
+.magecko-grid-filter-fields,
+.magecko-grid-summary,
+.magecko-pager {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.magecko-grid-filter .admin__control-text {
+    max-width: 220px;
+}
+.magecko-grid-summary {
+    justify-content: space-between;
+    margin: 0 0 10px;
+    color: #514943;
+}
+.magecko-pager {
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+.magecko-pager a,
+.magecko-pager strong {
+    min-width: 32px;
+    padding: 7px 10px;
+    text-align: center;
+}
+.magecko-status {
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 5px 8px;
+}
+.magecko-status-draft {
+    background: #f1f1f1;
+    color: #514943;
+}
+.magecko-status-published {
+    background: #e5f7e3;
+    color: #185b00;
+}
+</style>

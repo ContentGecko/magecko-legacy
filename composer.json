@@ -1,0 +1,28 @@
+{
+  "name": "contentgecko/magecko-legacy",
+  "description": "Legacy Magecko blog CMS module for Magento Open Source 2.2.6.",
+  "version": "1.0.0",
+  "type": "magento2-module",
+  "license": "proprietary",
+  "require": {
+    "php": "~7.1.0",
+    "magento/framework": "101.0.6",
+    "magento/module-backend": "100.2.6",
+    "magento/module-cms": "102.0.6",
+    "magento/module-config": "101.0.6",
+    "magento/module-media-storage": "100.2.2",
+    "magento/module-store": "100.2.5",
+    "magento/module-webapi": "100.2.4"
+  },
+  "conflict": {
+    "contentgecko/magecko": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magecko\\Blog\\": ""
+    }
+  }
+}

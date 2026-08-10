@@ -1,0 +1,183 @@
+.magecko-blog-hero {
+    margin: -12px 0 34px;
+    padding: 44px 48px;
+    border-left: 4px solid #e65c00;
+    background: #fff;
+}
+.magecko-blog-eyebrow,
+.magecko-blog-meta span,
+.magecko-blog-meta time {
+    color: #e65c00;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+.magecko-blog-hero h1 {
+    max-width: 760px;
+    margin: 0 0 12px;
+    color: #1f2226;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+.magecko-blog-hero p {
+    max-width: 720px;
+    margin: 0;
+    color: #4b5563;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.magecko-blog-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+.magecko-blog-card {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid #e6e1dc;
+    border-radius: 4px;
+    background: #fff;
+}
+.magecko-blog-card > :not(.magecko-blog-card-image) {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+.magecko-blog-card > .magecko-blog-meta {
+    margin-top: 24px;
+}
+.magecko-blog-card > .magecko-blog-readmore {
+    margin-bottom: 24px;
+}
+.magecko-blog-card-image {
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #e6e1dc;
+}
+.magecko-blog-card-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.magecko-blog-card h2 {
+    margin: 12px 0 8px;
+    font-size: 24px;
+    line-height: 1.22;
+}
+.magecko-blog-card h2 a,
+.magecko-blog-post h1 {
+    color: #1f2226;
+}
+.magecko-blog-card p {
+    color: #4b5563;
+    line-height: 1.6;
+}
+.magecko-blog-author {
+    margin: 0 0 8px;
+    color: #6b7280;
+    font-size: 13px;
+}
+.magecko-blog-readmore,
+.magecko-blog-back {
+    margin-top: auto;
+    color: #e65c00;
+    font-weight: 800;
+    text-decoration: none;
+}
+.magecko-blog-pager {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0 0;
+}
+.magecko-blog-pager a,
+.magecko-blog-pager strong {
+    min-width: 36px;
+    padding: 9px 12px;
+    border: 1px solid #e6e1dc;
+    background: #fff;
+    color: #1f2226;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+}
+.magecko-blog-pager strong {
+    border-color: #e65c00;
+    color: #e65c00;
+}
+.magecko-blog-post {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 44px 48px;
+    border-left: 4px solid #e65c00;
+    background: #fff;
+}
+.magecko-blog-post h1 {
+    margin: 14px 0 24px;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.12;
+}
+.magecko-blog-featured-image {
+    margin: 0 0 30px;
+}
+.magecko-blog-featured-image img {
+    width: 100%;
+    max-height: 460px;
+    display: block;
+    object-fit: cover;
+}
+.magecko-blog-body {
+    color: #262b31;
+    font-size: 18px;
+    line-height: 1.72;
+}
+.magecko-blog-body h2 {
+    margin: 34px 0 12px;
+    font-size: 28px;
+    font-weight: 800;
+}
+.magecko-blog-body blockquote {
+    margin: 28px 0;
+    padding: 14px 20px;
+    border-left: 4px solid #e65c00;
+    background: #f7f5f2;
+    font-style: italic;
+}
+.magecko-blog-body ul {
+    padding-left: 24px;
+}
+.magecko-blog-image-block {
+    margin: 30px 0;
+}
+.magecko-blog-image-block img {
+    width: 100%;
+    display: block;
+}
+.magecko-blog-image-block figcaption {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.magecko-blog-updated {
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid #e6e1dc;
+    color: #6b7280;
+    font-size: 13px;
+}
+@media (max-width: 900px) {
+    .magecko-blog-list {
+        grid-template-columns: 1fr;
+    }
+    .magecko-blog-hero,
+    .magecko-blog-post {
+        padding: 28px;
+    }
+}

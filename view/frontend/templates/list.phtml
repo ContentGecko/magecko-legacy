@@ -1,0 +1,67 @@
+<?php
+/** @var \Magecko\Blog\Block\Frontend\ListPosts $block */
+$posts = $block->getPosts();
+$currentPage = $block->getCurrentPage();
+$totalPages = $block->getTotalPages();
+?>
+<section class="magecko-blog-hero">
+    <p class="magecko-blog-eyebrow">Magecko Journal</p>
+    <h1>Motorcycle maintenance blog</h1>
+    <p>Workshop notes, service reminders, and buying guides for riders keeping their motorcycles ready.</p>
+</section>
+
+<section class="magecko-blog-list">
+    <?php if (!$posts->getSize()): ?>
+        <div class="message info empty">
+            <div>No blog posts have been published yet.</div>
+        </div>
+    <?php endif; ?>
+
+    <?php foreach ($posts as $post): ?>
+        <article class="magecko-blog-card">
+            <?php if ($post->getData('featured_image')): ?>
+                <a class="magecko-blog-card-image" href="<?= $block->escapeUrl($block->getPostUrl((string)$post->getData('slug'))) ?>">
+                    <img src="<?= $block->escapeUrl($block->getMediaUrl((string)$post->getData('featured_image'))) ?>" alt="<?= $block->escapeHtmlAttr((string)($post->getData('featured_image_alt') ?: $post->getData('title'))) ?>" loading="lazy">
+                </a>
+            <?php endif; ?>
+            <div class="magecko-blog-meta">
+                <?php if ($post->getData('topic')): ?>
+                    <span><?= $block->escapeHtml((string)$post->getData('topic')) ?></span>
+                <?php endif; ?>
+                <?php if ($post->getData('publish_date')): ?>
+                    <time><?= $block->escapeHtml($block->formatPostDate((string)$post->getData('publish_date'))) ?></time>
+                <?php endif; ?>
+            </div>
+            <h2>
+                <a href="<?= $block->escapeUrl($block->getPostUrl((string)$post->getData('slug'))) ?>">
+                    <?= $block->escapeHtml((string)$post->getData('title')) ?>
+                </a>
+            </h2>
+            <?php if ($post->getData('author')): ?>
+                <p class="magecko-blog-author">By <?= $block->escapeHtml((string)$post->getData('author')) ?></p>
+            <?php endif; ?>
+            <p><?= $block->escapeHtml($block->getExcerpt($block->filterHtml((string)$post->getData('body_html')))) ?></p>
+            <a class="magecko-blog-readmore" href="<?= $block->escapeUrl($block->getPostUrl((string)$post->getData('slug'))) ?>">Read article</a>
+        </article>
+    <?php endforeach; ?>
+</section>
+
+<?php if ($totalPages > 1): ?>
+    <nav class="magecko-blog-pager" aria-label="Blog pages">
+        <?php if ($currentPage > 1): ?>
+            <a href="<?= $block->escapeUrl($block->getPagerUrl($currentPage - 1)) ?>">Previous</a>
+        <?php endif; ?>
+
+        <?php for ($page = 1; $page <= $totalPages; $page++): ?>
+            <?php if ($page === $currentPage): ?>
+                <strong><?= (int)$page ?></strong>
+            <?php else: ?>
+                <a href="<?= $block->escapeUrl($block->getPagerUrl($page)) ?>"><?= (int)$page ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="<?= $block->escapeUrl($block->getPagerUrl($currentPage + 1)) ?>">Next</a>
+        <?php endif; ?>
+    </nav>
+<?php endif; ?>
