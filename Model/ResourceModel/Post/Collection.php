@@ -14,20 +14,20 @@ class Collection extends AbstractCollection
         $this->_init(Post::class, PostResource::class);
     }
 
-    public function addPublicOrder(): self
+    public function addPublicOrder(): Collection
     {
         $this->setOrder('publish_date', self::SORT_ORDER_DESC);
         $this->setOrder('post_id', self::SORT_ORDER_DESC);
         return $this;
     }
 
-    public function addPublishedFilter(): self
+    public function addPublishedFilter(): Collection
     {
         $this->addFieldToFilter('status', Post::STATUS_PUBLISHED);
         return $this;
     }
 
-    public function addStatusFilter(string $status): self
+    public function addStatusFilter(string $status): Collection
     {
         $status = trim($status);
         if (in_array($status, Post::STATUSES, true)) {
@@ -37,7 +37,7 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-    public function addTitleFilter(string $query): self
+    public function addTitleFilter(string $query): Collection
     {
         $query = trim($query);
         if ($query !== '') {
@@ -47,7 +47,7 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-    public function addTopicFilter(string $query): self
+    public function addTopicFilter(string $query): Collection
     {
         $query = trim($query);
         if ($query !== '') {
@@ -57,7 +57,7 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-    public function addAuthorFilter(string $query): self
+    public function addAuthorFilter(string $query): Collection
     {
         $query = trim($query);
         if ($query !== '') {

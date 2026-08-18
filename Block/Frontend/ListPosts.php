@@ -8,6 +8,7 @@ use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Cms\Model\Template\FilterProvider;
 use Magecko\Blog\Model\BlogUrl;
+use Magecko\Blog\Model\Config;
 use Magecko\Blog\Model\Post as BlogPost;
 use Magecko\Blog\Model\PostTranslation;
 use Magecko\Blog\Model\ResourceModel\Post\Collection;
@@ -23,6 +24,7 @@ class ListPosts extends Template implements IdentityInterface
     private $postTranslation;
     private $filterProvider;
     private $blogUrl;
+    private $config;
     private $posts = null;
 
     public function __construct(
@@ -31,6 +33,7 @@ class ListPosts extends Template implements IdentityInterface
         PostTranslation $postTranslation,
         FilterProvider $filterProvider,
         BlogUrl $blogUrl,
+        Config $config,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -38,6 +41,17 @@ class ListPosts extends Template implements IdentityInterface
         $this->postTranslation = $postTranslation;
         $this->filterProvider = $filterProvider;
         $this->blogUrl = $blogUrl;
+        $this->config = $config;
+    }
+
+    public function getHeading(): string
+    {
+        return $this->config->getHeading((int)$this->_storeManager->getStore()->getId());
+    }
+
+    public function getIntro(): string
+    {
+        return $this->config->getIntro((int)$this->_storeManager->getStore()->getId());
     }
 
     public function getPosts(): Collection
@@ -88,7 +102,7 @@ class ListPosts extends Template implements IdentityInterface
         return $this->blogUrl->getLandingUrl(null, $query);
     }
 
-    public function getMediaUrl(?string $path): string
+    public function getMediaUrl($path): string
     {
         $path = ltrim((string)$path, '/');
         if ($path === '') {
@@ -122,7 +136,7 @@ class ListPosts extends Template implements IdentityInterface
         }
     }
 
-    public function formatPostDate(?string $value): string
+    public function formatPostDate($value): string
     {
         if (!$value) {
             return '';

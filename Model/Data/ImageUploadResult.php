@@ -8,22 +8,22 @@ use Magecko\Blog\Api\Data\ImageUploadResultInterface;
 
 class ImageUploadResult extends DataObject implements ImageUploadResultInterface
 {
-    public function getPath(): ?string
+    public function getPath()
     {
         return $this->getData(self::PATH) !== null ? (string)$this->getData(self::PATH) : null;
     }
 
-    public function setPath(?string $path): ImageUploadResultInterface
+    public function setPath($path): ImageUploadResultInterface
     {
         return $this->setData(self::PATH, $path);
     }
 
-    public function getUrl(): ?string
+    public function getUrl()
     {
         return $this->getData(self::URL) !== null ? (string)$this->getData(self::URL) : null;
     }
 
-    public function setUrl(?string $url): ImageUploadResultInterface
+    public function setUrl($url): ImageUploadResultInterface
     {
         return $this->setData(self::URL, $url);
     }

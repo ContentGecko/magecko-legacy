@@ -149,12 +149,12 @@ class Index extends Template
         );
     }
 
-    public function getStatusLabel(?string $status): string
+    public function getStatusLabel($status): string
     {
         return (string)ucfirst(str_replace('_', ' ', (string)$status));
     }
 
-    public function isPublished(?string $status): bool
+    public function isPublished($status): bool
     {
         return $status === Post::STATUS_PUBLISHED;
     }

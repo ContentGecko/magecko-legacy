@@ -11,22 +11,22 @@ interface ImageUploadResultInterface
     /**
      * @return string|null
      */
-    public function getPath(): ?string;
+    public function getPath();
 
     /**
      * @param string|null $path
      * @return \Magecko\Blog\Api\Data\ImageUploadResultInterface
      */
-    public function setPath(?string $path): ImageUploadResultInterface;
+    public function setPath($path): ImageUploadResultInterface;
 
     /**
      * @return string|null
      */
-    public function getUrl(): ?string;
+    public function getUrl();
 
     /**
      * @param string|null $url
      * @return \Magecko\Blog\Api\Data\ImageUploadResultInterface
      */
-    public function setUrl(?string $url): ImageUploadResultInterface;
+    public function setUrl($url): ImageUploadResultInterface;
 }

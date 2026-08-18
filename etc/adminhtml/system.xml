@@ -26,6 +26,22 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
+                <field id="heading" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Landing Page Heading</label>
+                    <comment>Shown as the H1 on the blog landing page. Defaults to "Blog".</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="intro" translate="label comment" type="textarea" sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Landing Page Intro</label>
+                    <comment>Optional paragraph below the heading. Leave empty to hide it.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

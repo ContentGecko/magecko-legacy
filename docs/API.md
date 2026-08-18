@@ -47,9 +47,9 @@ POST   /rest/V1/magecko-blog/media
     "publish_date": "2026-07-06 13:00:00",
     "modified_date": "2026-07-06 13:00:00",
     "featured_image": "magecko/blog/brake-pads.png",
-    "featured_image_alt": "Motorcycle brake pads on a workbench",
+    "featured_image_alt": "Product photo on a neutral background",
     "meta_title": "Brake Pad Wear Checklist",
-    "meta_description": "A practical motorcycle brake pad inspection guide.",
+    "meta_description": "A practical inspection and maintenance guide.",
     "canonical_url": "",
     "body_html": "<h2>Brake pad inspection</h2><p>Check pad material before long rides.</p>"
   }

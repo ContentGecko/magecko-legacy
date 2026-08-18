@@ -3,11 +3,13 @@
 $posts = $block->getPosts();
 $currentPage = $block->getCurrentPage();
 $totalPages = $block->getTotalPages();
+$intro = $block->getIntro();
 ?>
 <section class="magecko-blog-hero">
-    <p class="magecko-blog-eyebrow">Magecko Journal</p>
-    <h1>Motorcycle maintenance blog</h1>
-    <p>Workshop notes, service reminders, and buying guides for riders keeping their motorcycles ready.</p>
+    <h1><?= $block->escapeHtml($block->getHeading()) ?></h1>
+    <?php if ($intro !== ''): ?>
+        <p><?= $block->escapeHtml($intro) ?></p>
+    <?php endif; ?>
 </section>
 
 <section class="magecko-blog-list">

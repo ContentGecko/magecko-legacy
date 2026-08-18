@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\App\Area;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\ObjectManager\ConfigLoader;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Filesystem;
@@ -50,6 +52,13 @@ try {
 } catch (Throwable $exception) {
     // Area code may already be set when this script is called from another runner.
 }
+
+// Setting the area code alone does not load that area's DI configuration. Without
+// this, rendering an Admin block in developer mode fails resolving area-scoped
+// plugin arguments (for example Magento\Developer\...\DebugHints::$debugHintsPath).
+$objectManager->configure(
+    $objectManager->get(ConfigLoader::class)->load(Area::AREA_ADMINHTML)
+);
 
 /** @var ResourceConnection $resource */
 $resource = $objectManager->get(ResourceConnection::class);

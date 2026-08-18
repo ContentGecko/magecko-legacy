@@ -6,6 +6,7 @@
             <storefront>
                 <enabled>0</enabled>
                 <route>blog</route>
+                <heading>Blog</heading>
             </storefront>
         </magecko_blog>
     </default>

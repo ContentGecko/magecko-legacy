@@ -128,7 +128,7 @@ class PostTranslation
         return $post;
     }
 
-    public function applyToPosts(iterable $posts, int $storeId): void
+    public function applyToPosts(iterable $posts, int $storeId)
     {
         if ($storeId <= 0) {
             return;
@@ -157,7 +157,7 @@ class PostTranslation
         }
     }
 
-    public function save(int $postId, int $storeId, array $data): void
+    public function save(int $postId, int $storeId, array $data)
     {
         if ($postId <= 0 || $storeId <= 0) {
             throw new \InvalidArgumentException('A valid post ID and store ID are required.');
@@ -185,7 +185,7 @@ class PostTranslation
         );
     }
 
-    public function delete(int $postId, int $storeId): void
+    public function delete(int $postId, int $storeId)
     {
         if ($postId <= 0 || $storeId <= 0) {
             return;

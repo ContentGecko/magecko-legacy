@@ -10,7 +10,10 @@ class Config
 {
     public const XML_PATH_STOREFRONT_ENABLED = 'magecko_blog/storefront/enabled';
     public const XML_PATH_ROUTE = 'magecko_blog/storefront/route';
+    public const XML_PATH_HEADING = 'magecko_blog/storefront/heading';
+    public const XML_PATH_INTRO = 'magecko_blog/storefront/intro';
     public const DEFAULT_ROUTE = 'blog';
+    public const DEFAULT_HEADING = 'Blog';
 
     private $scopeConfig;
 
@@ -37,6 +40,26 @@ class Config
         );
 
         return self::normalizeRoute($route) ?: self::DEFAULT_ROUTE;
+    }
+
+    public function getHeading(?int $storeId = null): string
+    {
+        $heading = trim((string)$this->scopeConfig->getValue(
+            self::XML_PATH_HEADING,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        ));
+
+        return $heading !== '' ? $heading : self::DEFAULT_HEADING;
+    }
+
+    public function getIntro(?int $storeId = null): string
+    {
+        return trim((string)$this->scopeConfig->getValue(
+            self::XML_PATH_INTRO,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        ));
     }
 
     public static function normalizeRoute(string $route): string

@@ -107,7 +107,7 @@ class Edit extends Template
         return $this->blogFormKey->getFormKey();
     }
 
-    public function formatForDatetimeInput(?string $value): string
+    public function formatForDatetimeInput($value): string
     {
         if (!$value) {
             return '';
@@ -120,7 +120,7 @@ class Edit extends Template
         }
     }
 
-    public function getMediaUrl(?string $path): string
+    public function getMediaUrl($path): string
     {
         $path = ltrim((string)$path, '/');
         if ($path === '') {
@@ -140,8 +140,7 @@ class Edit extends Template
     public function getStoreViews(): array
     {
         $defaultStoreId = $this->getDefaultStoreId();
-        return array_values(array_filter(
-            $this->storeManager->getStores(false),
+        return array_values(array_filter($this->storeManager->getStores(false),
             static function (StoreInterface $store) use ($defaultStoreId): bool {
                 return (int)$store->getId() !== $defaultStoreId;
             }

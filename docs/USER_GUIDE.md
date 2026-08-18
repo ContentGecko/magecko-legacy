@@ -28,6 +28,8 @@ Go to `Stores > Configuration > General > Magecko Blog`.
 
 - `Enable Storefront` controls whether Magecko claims its configured frontend route.
 - `Frontend Route` controls the landing-page URL key, for example `magecko-test` or `articles`.
+- `Landing Page Heading` sets the H1 on the blog landing page. Defaults to `Blog`.
+- `Landing Page Intro` is an optional paragraph below the heading. Leave it empty to hide it.
 
 Settings can differ by website or store view. Leave Magecko disabled until the route has passed `bin/magento magecko:compatibility-check` on staging.
 

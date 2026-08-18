@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.0.1 - Magento 2.2 legacy line
+
+- Fixed four ways Magento 2.2.6's Interceptor generator mis-renders PHP 7.1 return and
+  parameter types. In developer mode the generated Interceptor mirrors every public method
+  of its parent, so any public method using one of these constructs broke the class:
+    - Nullable parameter types without a default (`?string $x`) lost the `?`, producing an
+      incompatible signature warning.
+    - Nullable return types (`: ?int`) lost the `?`, which escalates to a fatal error where
+      an interface declares the same method.
+    - `void` return types produced `return parent::method();`, a fatal in a void function.
+    - `self` return types were rendered as `\self`, an invalid class name.
+  All four were removed from public methods and, where applicable, their interfaces. The
+  docblocks already carried the same contract. Private and protected methods are not
+  mirrored into Interceptors and were left unchanged.
+- Replaced the hardcoded landing-page hero text with configurable `Landing Page Heading`
+  and `Landing Page Intro` settings, scoped per store view.
+- Removed the unused `.magecko-blog-eyebrow` style rule and genericised the API doc examples.
+- Fixed the integration smoke runner, which set the area code but never loaded that
+  area's DI configuration. Rendering an Admin block in developer mode failed resolving
+  area-scoped plugin arguments.
+
 ## 1.0.0 - Magento 2.2 legacy line
 
 - Created a separate Composer package, `contentgecko/magecko-legacy`.

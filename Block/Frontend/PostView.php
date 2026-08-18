@@ -52,7 +52,7 @@ class PostView extends Template implements IdentityInterface
         return $this->blogUrl->getLandingUrl();
     }
 
-    public function getMediaUrl(?string $path): string
+    public function getMediaUrl($path): string
     {
         $path = ltrim((string)$path, '/');
         if ($path === '') {
@@ -66,7 +66,7 @@ class PostView extends Template implements IdentityInterface
         return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $path;
     }
 
-    public function formatPostDate(?string $value): string
+    public function formatPostDate($value): string
     {
         if (!$value) {
             return '';

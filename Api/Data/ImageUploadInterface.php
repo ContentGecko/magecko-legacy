@@ -12,33 +12,33 @@ interface ImageUploadInterface
     /**
      * @return string|null
      */
-    public function getFileName(): ?string;
+    public function getFileName();
 
     /**
      * @param string|null $fileName
      * @return \Magecko\Blog\Api\Data\ImageUploadInterface
      */
-    public function setFileName(?string $fileName): ImageUploadInterface;
+    public function setFileName($fileName): ImageUploadInterface;
 
     /**
      * @return string|null
      */
-    public function getContentBase64(): ?string;
+    public function getContentBase64();
 
     /**
      * @param string|null $contentBase64
      * @return \Magecko\Blog\Api\Data\ImageUploadInterface
      */
-    public function setContentBase64(?string $contentBase64): ImageUploadInterface;
+    public function setContentBase64($contentBase64): ImageUploadInterface;
 
     /**
      * @return string|null
      */
-    public function getMimeType(): ?string;
+    public function getMimeType();
 
     /**
      * @param string|null $mimeType
      * @return \Magecko\Blog\Api\Data\ImageUploadInterface
      */
-    public function setMimeType(?string $mimeType): ImageUploadInterface;
+    public function setMimeType($mimeType): ImageUploadInterface;
 }
